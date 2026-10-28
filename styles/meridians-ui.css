@@ -1,0 +1,98 @@
+/* Mobile controls, without changing the source atlas. */
+.speech-speed { display: none !important; }
+#pronunciation-status[hidden] { display: none !important; }
+.buyi-cun-help {
+  display: inline-flex; align-items: center; min-height: 36px;
+  margin: 0; padding: 5px 12px; border: 1px solid currentColor;
+  border-radius: 18px; color: inherit; background: transparent;
+  font: inherit; font-size: 12px; cursor: pointer;
+}
+.buyi-cun-help:focus-visible { outline: 2px solid currentColor; outline-offset: 3px; }
+.buyi-location-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.buyi-location-heading > span { color: inherit; font-size: 12px; }
+.buyi-location-heading .buyi-cun-help { flex: 0 0 auto; }
+.buyi-viewer-reset {
+  position: absolute; top: 16px; right: 16px; z-index: 6;
+  display: grid; place-items: center; width: 44px; height: 44px;
+  min-height: 44px; padding: 0; border: 1px solid var(--line, #cdbb9e);
+  border-radius: 50%; color: var(--ink, #3e3025); background: var(--paper, #fffaf2);
+  box-shadow: 0 3px 12px #3e302512; cursor: pointer;
+}
+.buyi-viewer-reset svg { width: 23px; height: 23px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.buyi-viewer-reset:focus-visible { outline: 2px solid currentColor; outline-offset: 3px; }
+#point-directory, .viewer { scroll-margin-top: 8px; }
+.suite-embedded #point-search,
+.suite-embedded label[for="point-search"] { display: none !important; }
+.buyi-meridian-searching .inspector > :not(.atlas-picker) { display: none !important; }
+.buyi-meridian-searching #point-directory > summary > span:last-child { display: none; }
+@media (max-width: 740px) {
+  .buyi-meridian-searching .viewer { display: none !important; }
+  .buyi-meridian-searching .inspector { min-height: 50vh; }
+  .buyi-meridian-searching #point-results { max-height: none; }
+}
+
+/* The same-body guide is owned by the integrated shell. */
+
+
+/* Reserve a distinct top-left slot for reset, away from the view title. */
+.buyi-viewer-reset{left:16px;right:auto}
+.viewer .view-heading{padding-left:60px}
+.buyi-source-indications{margin:14px 0;padding:14px;border:1px solid var(--line,#cdbb9e);border-radius:10px}
+.buyi-source-indications p,.buyi-source-indications blockquote{font-size:13px;line-height:1.6;margin:8px 0}
+.buyi-source-indications summary{cursor:pointer;min-height:36px;align-content:center}
+
+/* One row for heading, pinyin and speech; wrap gracefully on small screens. */
+.buyi-pronunciation-heading{display:flex;align-items:baseline;flex-wrap:wrap;gap:4px 12px}
+.buyi-pronunciation-heading h2,.buyi-pronunciation-heading h3{margin:0;min-width:0}
+.buyi-pronunciation-heading .pronunciation-row{margin:0;display:flex;align-items:center;gap:8px}
+.suite-embedded #panel-location .scope-note,.suite-embedded .inspector-footer{display:none!important}
+.cun-guide{width:min(520px,calc(100vw - 24px));padding:20px;max-height:calc(100dvh - 24px);overflow:auto}
+.cun-guide .menu-heading{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.cun-guide .menu-heading h2{margin:0;font-size:20px}.cun-guide .menu-heading button{min-width:44px;min-height:44px}
+.cun-guide .cun-cards{display:grid;gap:10px}.cun-guide .cun-card{display:grid;grid-template-columns:minmax(0,1fr) 126px;align-items:center;gap:10px;border:1px solid var(--line);border-radius:12px;padding:10px 12px;min-height:160px}
+.cun-guide .cun-card h3{margin:0 0 6px;font:600 23px "Songti SC",serif}.cun-guide .cun-card p{font-size:13px;line-height:1.6;margin:0}.cun-guide .cun-illustration{display:block;width:126px;height:142px;object-fit:contain}
+.cun-guide svg .hand{fill:none;stroke:var(--ink);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}.cun-guide svg .measure{fill:none;stroke:#a45032;stroke-width:2}.cun-guide svg text{fill:var(--ink);font:12px sans-serif;text-anchor:middle}
+.cun-guide .cun-note,.cun-guide .cun-intro{font-size:13px;line-height:1.6}.cun-reference-image{mix-blend-mode:multiply}html[data-theme="dark"] .cun-reference-image{filter:invert(1);mix-blend-mode:screen}
+@media(max-width:350px){.cun-guide{padding:16px}.cun-guide .cun-card{grid-template-columns:minmax(0,1fr) 102px}.cun-guide .cun-illustration{width:102px}}
+
+/* Swap the two top corner controls without changing camera behavior. */
+.suite-embedded .viewer .orientation{left:16px;right:auto;top:16px}
+.suite-embedded .viewer .buyi-viewer-reset{left:auto;right:16px;top:16px}
+.buyi-intro-sources{margin-top:12px;color:var(--muted)}
+.buyi-intro-sources summary{min-height:44px;cursor:pointer;align-content:center}
+.buyi-intro-sources .source-list{margin-top:6px}
+.buyi-license-row{display:flex;flex-wrap:wrap;align-items:center;gap:4px 14px}
+.buyi-license-row .source-link{margin:0}
+
+.cun-guide svg .guide{fill:none;stroke:var(--ink);stroke-width:1;stroke-dasharray:3 3}
+
+/* Source-coordinate linework. These selectors intentionally outrank legacy
+   .cun-card svg text / .hand / .measure rules without reusing their classes. */
+svg.cun-reference {
+  color: var(--ink, #292520);
+  --cun-measure: #a45032;
+  display: block;
+  overflow: visible;
+}
+svg.cun-reference .cun-ref-outline,
+svg.cun-reference .cun-ref-detail,
+svg.cun-reference .cun-ref-fine,
+svg.cun-reference .cun-ref-dimension {
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+svg.cun-reference .cun-ref-outline { stroke-width: 9; }
+svg.cun-reference .cun-ref-detail { stroke-width: 7; }
+svg.cun-reference .cun-ref-fine { stroke-width: 5.5; }
+svg.cun-reference .cun-ref-dimension { stroke: var(--cun-measure, #a45032); stroke-width: 7.5; }
+svg.cun-reference .cun-ref-label {
+  fill: currentColor;
+  stroke: none;
+  font-family: "Songti SC", "Noto Serif CJK SC", serif;
+  font-weight: 700;
+  text-anchor: middle;
+}
+html[data-theme="dark"] svg.cun-reference { --cun-measure: #e4a377; }
+

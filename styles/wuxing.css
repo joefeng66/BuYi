@@ -1,0 +1,142 @@
+/* Presentation-only integration layer; source columns, blanks and provenance are preserved. */
+:root { --paper: #f6efe4; --ink: #3e3025; --muted: #75614f; --line: #ded0bd; --accent: #835336; }
+html { color-scheme: light; }
+body { font-size: 15px; line-height: 1.75; }
+button, select, input, summary { touch-action: manipulation; }
+button, select, summary { min-height: 44px; }
+button:focus-visible, select:focus-visible, input:focus-visible, a:focus-visible,
+summary:focus-visible, svg:focus-visible, .token:focus-visible, .table-scroll:focus-visible,
+pre:focus-visible { outline: 3px solid #9a5a30; outline-offset: 3px; }
+header { min-height: 78px; height: auto; margin: 0 28px; padding-block: 15px; }
+.brand { font-size: 19px; }
+.brand small { font-size: 12px; color: var(--muted); }
+.edition, .text-button { color: #755d45; font-size: 12px; }
+.page-nav { padding-top: 12px; gap: 22px; color: #715238; }
+.page-nav a, .page-nav button { display: inline-flex; min-height: 44px; align-items: center; font-size: 13px; }
+.page-nav span { color: #785c3d; font-size: 12px; }
+main { padding-top: 18px; }
+.north { color: #846343; font-size: 11px; }
+.rotation-bar strong { color: #654b35; font-size: 13px; }
+.rotation-bar small { color: #7c6246; font-size: 11px; }
+.rotation-bar > button { min-height: 48px; }
+.scene-hint, .board-context { color: #7b6146; font-size: 12px; }
+.section-eyebrow, .section-heading > span { color: #836346; font-size: 12px; }
+.section-heading h2 { font-size: 16px; }
+.relation-card { background: #ede0cc; border-color: #d9c3a5; }
+#relation-title span, #relation-values small { color: #74583d; font-size: 12px; }
+.relation-card p { color: #74583d; font-size: 13px; }
+.instruction, .microcopy, .layer-source { color: #786047; font-size: 12px; }
+.layer-row { gap: 8px; padding: 10px; background: #fcf7ee; border-color: #d9c8af; }
+.layer-main select { font-size: 15px; width: 100%; }
+.layer-main small { color: #786047; font-size: 12px; }
+.layer-number { color: #8b6846; }
+.drag-handle { color: #89603a; width: 28px; min-width: 28px; min-height: 48px; }
+.move-buttons { gap: 2px; }
+.move-buttons button { min-width: 36px; min-height: 34px; font-size: 15px; padding: 3px 8px; color: #78522f; }
+.move-buttons button:disabled { opacity: .35; }
+#top-values small { color: #785b3c; font-size: 12px; }
+.align-button { color: #7e512d; font-size: 13px; }
+footer { font-size: 13px; color: #795f43; }
+footer small { font-size: 12px; color: #7e654b; }
+.inline-link { color: #7e4c2a; font-size: 13px; }
+.reference-heading p { color: #786047; font-size: 14px; }
+.reference-heading h2 { font-family: "Songti SC", "Noto Serif CJK SC", "STSong", serif; color: var(--ink); }
+.search-field { font-size: 13px; color: #735a40; }
+.search-field input { min-height: 46px; font-size: 16px; background: #fffaf2; border-color: #cdb89a; }
+.filter-buttons button { min-height: 44px; font-size: 13px; color: #785839; }
+.filter-buttons button[aria-pressed="true"] { background: #835336; color: #fff8ec; }
+.target-field { font-size: 13px; color: #73583c; }
+.target-field select { font-size: 16px; }
+.table-heading h3 { font-size: 16px; }
+.table-heading span { font-size: 12px; color: #785d40; }
+.table-choose { font-size: 15px; }
+thead th { color: #705133; font-size: 13px; }
+.on-disc, .source-cell, .source-cell details p { font-size: 12px; color: #795f42; }
+.source-cell summary { display: inline-flex; align-items: center; }
+.reference-note, #atlas-status { font-size: 13px; color: #775d43; }
+.blank-cell { color: #806c55; }
+.narrative-card { background: #fcf7ed; }
+.narrative-card blockquote { font-size: 15px; color: #634c35; }
+.narrative-heading h3 { font-size: 16px; }
+.narrative-number { color: #8a653f; }
+.page-footnote { color: #795d3f; font-size: 12px; }
+.category-option { min-height: 76px; }
+.category-option small { color: #7c5d3c; font-size: 12px; }
+.picker-group, #picker-help, #source-description { color: #765638; font-size: 13px; }
+#source-lines { font-size: 14px; }
+#source-close, #picker-close { width: 44px; height: 44px; }
+@media (max-width: 1100px) and (min-width: 761px) {
+  main { grid-template-columns: minmax(0, 1fr) 290px; gap: 20px; }
+  .rotation-bar { gap: 8px; }
+  .rotation-bar > div { min-width: 100px; }
+  .rotation-bar > button { min-width: 58px; padding-inline: 5px; }
+}
+@media (max-width: 760px) {
+  header { margin-inline: 16px; padding-block: 12px; min-height: 74px; gap: 10px; }
+  .brand { font-size: 17px; gap: 9px; letter-spacing: .04em; min-width: 0; }
+  .brand small { font-size: 11px; letter-spacing: 0; }
+  .seal { flex-shrink: 0; }
+  .text-button { font-size: 12px; white-space: nowrap; margin-left: auto; }
+  .page-nav { padding: 8px 16px 0; gap: 2px 18px; flex-wrap: wrap; }
+  .page-nav a, .page-nav button { font-size: 13px; }
+  main { padding: 8px 12px 20px; display: block; }
+  .board-wrap { margin-top: 12px; }
+  .north { font-size: 10px; }
+  .rotation-bar { display: grid; grid-template-columns: 64px minmax(0, 1fr) 64px; gap: 8px; max-width: 390px; width: 100%; margin-top: 0; }
+  .rotation-bar > button { min-width: 0; width: 100%; min-height: 48px; padding: 6px 4px; font-size: 13px; }
+  .rotation-bar > button span { font-size: 18px; margin: 0 2px; }
+  .rotation-bar > div { min-width: 0; }
+  .rotation-bar small { display: block; font-size: 10px; }
+  .scene-hint { font-size: 11px; margin-inline: 4px; }
+  .board-context { font-size: 12px; margin-inline: 4px; }
+  aside { display: grid; grid-template-columns: minmax(0, 1fr); padding: 8px 4px 20px; gap: 22px; }
+  .relation-card { display: block; padding: 18px; }
+  #relation-title { margin-bottom: 12px; }
+  #relation-values b { font-size: 25px; }
+  .layer-row { gap: 7px; padding: 9px; }
+  .layer-number { min-width: 16px; }
+  .move-buttons button { min-width: 44px; min-height: 44px; }
+  .drag-handle { min-width: 32px; width: 32px; min-height: 48px; }
+  .reference-section { margin: 20px 16px 0; }
+  .reference-heading h2 { font-size: 24px; }
+  .reference-heading p { font-size: 13px; }
+  .atlas-toolbar { padding: 12px; gap: 14px; }
+  .atlas-toolbar .search-field { display: flex; flex-direction: column; align-items: stretch; width: 100%; }
+  .filter-buttons { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; width: 100%; }
+  .filter-buttons button { padding: 8px; }
+  .target-field { width: 100%; justify-content: space-between; margin-left: 0; }
+  .table-heading { flex-wrap: wrap; gap: 4px; }
+  .table-scroll { max-width: 100%; }
+  .reference-note { font-size: 12px; }
+  .narrative-card { padding: 16px; }
+  .narrative-heading { flex-wrap: wrap; gap: 7px; }
+  .narrative-heading button { font-size: 12px; }
+  .narrative-card blockquote { font-size: 14px; }
+  .page-footnote { margin-inline: 16px; }
+  .category-option { padding: 12px; grid-template-columns: 48px minmax(0, 1fr); gap: 4px 10px; }
+  .option-values { font-size: 21px; }
+  #source-dialog, #category-picker { padding: 20px 14px; }
+  .picker-heading { gap: 8px; }
+  .picker-heading h2 { font-size: 18px; }
+}
+@media (max-width: 350px) {
+  .brand { font-size: 16px; }
+  .brand small { max-width: 145px; font-size: 10px; }
+  .text-button { font-size: 11px; }
+  .section-heading { flex-wrap: wrap; gap: 4px; }
+  .layer-row { gap: 5px; padding: 8px 6px; }
+  .drag-handle { min-width: 26px; width: 26px; }
+  .layer-number { min-width: 12px; }
+  .relation-card { padding: 15px; }
+}
+
+/* Explicit alphabetic baselines are shared by SVG and canvas across browsers.
+   Per-line ink metrics, applied after the embedded font loads, centre the glyphs. */
+#token-labels text,#token-labels tspan{dominant-baseline:alphabetic;alignment-baseline:baseline}
+.brand .seal{font-size:18px;letter-spacing:0;white-space:nowrap;min-width:42px}
+
+/* Retain reset on the view-control row without a second masthead. */
+.suite-embedded body>header{display:contents}
+.suite-embedded body>header>.brand,.suite-embedded body>header>.edition{display:none}
+.suite-embedded body>header>#reset{position:absolute;top:7px;right:18px;min-height:44px;margin:0;padding:6px 8px;z-index:2}
+@media(max-width:350px){.suite-embedded body>header>#reset{right:8px;font-size:11px;padding-inline:5px}}

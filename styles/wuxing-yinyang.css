@@ -1,0 +1,8 @@
+/* Existing words only: yin black, yang white, unclassified reddish brown.
+   Yin and unclassified chips retain original wood. Yang chips use warm brown
+   so pure white glyphs remain readable without outlines or shadows. Unknown
+   reddish-brown/cream edge is 5.35:1; its light halo remains unchanged. */
+#token-labels text[data-yy-polarity="yin"],#token-labels text[data-yy-polarity="yin"] tspan{fill:#000;stroke:none}
+#token-labels text[data-yy-polarity="yang"],#token-labels text[data-yy-polarity="yang"] tspan{fill:#fff;stroke:none;stroke-width:0;text-shadow:none;filter:none;paint-order:normal}
+#token-labels text[data-yy-polarity="unknown"],#token-labels text[data-yy-polarity="unknown"] tspan{fill:#a14932;stroke:#fff1d6;stroke-width:1.4px;stroke-linejoin:round;paint-order:stroke fill;vector-effect:non-scaling-stroke}
+#tokens .token[data-yy-polarity="yang"] .chip-top{fill:#795238}

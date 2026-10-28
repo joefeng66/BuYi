@@ -1,5 +1,7 @@
 # 布医：单一开发源与本机发布
 
+**网页地址：[joefeng66.github.io/BuYi/](https://joefeng66.github.io/BuYi/)**
+
 唯一开发源是 WikiTCM 的 `41WebApp/源文件/整合版`。`main` 维护已审阅的程序和发布工具；`pages-dist` 保存本机生成的独立成品，不维护第二份开发源码。
 
 `.gitignore` 默认排除所有文件，仅放行已列出的程序、样式、发布工具和许可。公开仓库会公开被提交的源码和历史。`originals/`、`content/`、含原始数据的 `index.html`、`docs/`、私人日志、备份、缓存、测试截图、重复副本及 `dist/` 保持在本机；选定的运行资料只由发布脚本进入产物。旧仓库已有的跟踪文件不会因新 `.gitignore` 自动消失，接入远端前还须检查当前树与历史。

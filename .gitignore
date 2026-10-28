@@ -1,0 +1,9 @@
+# The lecture PDF is kept only for this local preview pending rights review.
+/assets/lecture.pdf
+.DS_Store
+.env
+.env.*
+!.env.example
+__pycache__/
+*.pyc
+node_modules/

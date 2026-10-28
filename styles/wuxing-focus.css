@@ -4,17 +4,9 @@
 #clockwise-arcs,#wuxing-focus-edges{fill:none;stroke:var(--relation-line-color);stroke-width:var(--relation-line-width);stroke-linecap:butt;opacity:var(--relation-line-opacity)}
 #clockwise-arcs>path,#wuxing-focus-edges>path{fill:none;stroke:inherit;stroke-width:inherit;stroke-linecap:butt;vector-effect:none}
 #clockwise-arrow path,#wuxing-focus-arrow path{fill:var(--relation-line-color);stroke:none}
-#wuxing-focus-controls{display:grid;grid-template-rows:44px 44px;gap:6px;height:94px;margin:6px 0 0;color:var(--ink)}
-#wuxing-focus-toolbar{display:grid;grid-template-columns:minmax(0,1fr) 88px;align-items:center;gap:12px;min-width:0}
-#wuxing-focus-instruction{margin:0;min-width:0;font-size:13px;line-height:22px;overflow-wrap:anywhere}
-#wuxing-focus-exit{flex-shrink:0;min-height:44px;min-width:88px;padding:8px 14px;border:1px solid #987451;border-radius:8px;background:#fff6e7;color:#4c301f;font:inherit;font-size:14px;cursor:pointer}
-/* The fixed parent grid reserves both rows even when these children use
-   native hidden behavior, remaining unfocusable and absent from the a11y tree. */
-#wuxing-focus-exit[hidden],#wuxing-focus-status[hidden]{visibility:hidden;pointer-events:none}
-#wuxing-focus-status{margin:0;min-width:0;font-size:13px;line-height:22px;color:var(--ink);overflow-wrap:anywhere}
-/* Preserve the existing control slots and board geometry while removing
-   presentation copy. Native drag/status updates cannot flash these labels. */
-#wuxing-focus-status,#disc .north,#disc #drag-hint{visibility:hidden;pointer-events:none}
+#wuxing-focus-toolbar{display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:44px 56px;align-content:start;justify-items:stretch;gap:12px;min-width:0;padding-top:8px}
+#wuxing-focus-exit{min-width:0;min-height:56px;width:100%;margin:0;padding:6px 4px;border:1px solid #987451;border-radius:8px;background:#fff6e7;color:#4c301f;font:inherit;font-size:13px;line-height:20px;white-space:normal;word-break:normal;cursor:pointer}
+#disc .north,#disc #drag-hint{visibility:hidden;pointer-events:none}
 #disc .workspace.relationship-focus .rotation-bar>div{visibility:hidden;pointer-events:none}
 #disc .rotation-bar>button>svg{display:block;width:24px;height:24px;margin-inline:auto;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;pointer-events:none}
 #wuxing-focus-edges,#wuxing-focus-labels,#wuxing-focus-drag-ring{display:none}
@@ -28,13 +20,21 @@
 #board.relationship-focus .token.relationship-selected .selection{stroke:#3d2517;stroke-width:2.5px;vector-effect:non-scaling-stroke}
 #board.relationship-focus .token:focus-visible{outline:3px solid #3d2517;outline-offset:4px}
 html[data-theme="dark"] #wuxing-focus-exit{background:#3b3026;border-color:#c69b6c;color:#f3dfc0}
-@media(max-width:760px){#wuxing-focus-controls{grid-template-rows:44px 60px;height:110px;margin-inline:4px}#wuxing-focus-toolbar{gap:8px}#wuxing-focus-instruction,#wuxing-focus-status{font-size:12px;line-height:20px}#wuxing-focus-exit{font-size:13px;padding-inline:10px}}
-
-/* The instruction shares the tab row; reserved controls keep wheel position stable. */
-.page-nav #wuxing-focus-instruction{flex:1 1 175px;text-align:right;font-size:12px;line-height:1.45}
-.page-nav:has(#view-disc[aria-selected="false"]) #wuxing-focus-instruction{visibility:hidden}
-@media(max-width:430px){.page-nav{gap:4px;padding-inline:10px}.page-nav [role="tab"]{min-width:66px;padding-inline:7px}.page-nav #wuxing-focus-instruction{font-size:11px}}
-#wuxing-focus-toolbar #wuxing-focus-exit{grid-column:2}
+/* A labelled dialog keeps the complete changing instruction outside document flow. */
+.page-nav #wuxing-help-toggle{flex:0 0 auto;margin-left:auto;min-width:80px;min-height:44px;padding:8px 6px;border:1px solid var(--line);border-radius:8px;font-size:12px;line-height:20px;color:var(--ink);white-space:nowrap}
+.page-nav:has(#view-disc[aria-selected="false"]) #wuxing-help-toggle{visibility:hidden}
+#wuxing-help-popover{position:fixed;inset:12px;margin:auto;width:min(440px,calc(100% - 24px));max-width:none;max-height:calc(100vh - 24px);max-height:calc(100dvh - 24px - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px));padding:16px;border:1px solid var(--line);border-radius:14px;background:var(--paper);color:var(--ink);box-shadow:0 18px 70px #382a2440;overflow:auto;overscroll-behavior:contain}
+#wuxing-help-popover[open]{display:grid;grid-template-rows:auto minmax(0,1fr);gap:12px}
+#wuxing-help-popover::backdrop{background:#33241955;backdrop-filter:blur(3px)}
+.wuxing-help-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;min-width:0}
+.wuxing-help-heading h2{margin:0;font-size:17px;line-height:1.5}
+#wuxing-help-close{flex-shrink:0;min-height:44px;padding:8px 10px;border:1px solid var(--line);border-radius:8px;font-size:13px}
+#wuxing-focus-controls{min-height:0;min-width:0;overflow-y:auto;overflow-wrap:anywhere;line-height:1.75}
+#wuxing-focus-controls ul{margin:12px 0;padding-left:22px}
+#wuxing-focus-controls li+li{margin-top:8px}
+#wuxing-focus-instruction{margin:0;font-size:14px;font-weight:600;line-height:1.75;white-space:normal}
+#wuxing-focus-status{margin:12px 0 0;padding-top:12px;border-top:1px solid var(--line);font-size:13px;line-height:1.75;color:var(--ink)}
+@media(max-width:350px){.page-nav [role="tab"]{padding-inline:10px}.page-nav #wuxing-help-toggle{min-width:76px;font-size:12px}}
 
 /* Larger circular rotation controls, without altering step/drag handlers. */
 #disc .rotation-bar>button{width:56px;height:56px;min-width:56px;min-height:56px;padding:0;border-radius:50%;display:grid;place-items:center}
@@ -46,7 +46,7 @@ html[data-theme="dark"] #wuxing-focus-labels text{fill:#20140d}
 
 /* Secondary relationships retain direction without competing with the four focal edges. */
 #wuxing-focus-edges>path.secondary-relation{stroke-width:2.8px;stroke-dasharray:9 8;opacity:.66}
-.board-wrap>.wheel-reset{position:absolute;right:2%;top:2%;z-index:2;width:44px;height:44px;min-height:44px;margin:0;padding:10px;display:grid;place-items:center;border:1px solid #b99a73;border-radius:50%;background:#f9f2e5;color:#5b412c;box-shadow:0 3px 10px #52351b14}
-.board-wrap>.wheel-reset svg{width:23px;height:23px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-.board-wrap>.wheel-reset:focus-visible{outline:2px solid currentColor;outline-offset:3px}
-html[data-theme="dark"] .board-wrap>.wheel-reset{background:#392a1e;border-color:#a37a52;color:#f3dfc0}
+.wheel-actions>.wheel-reset{position:static;width:44px;height:44px;min-height:44px;margin:0;padding:10px;display:grid;place-items:center;border:1px solid #b99a73;border-radius:50%;background:#f9f2e5;color:#5b412c;box-shadow:0 3px 10px #52351b14}
+.wheel-actions>.wheel-reset svg{width:23px;height:23px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.wheel-actions>.wheel-reset:focus-visible{outline:2px solid currentColor;outline-offset:3px}
+html[data-theme="dark"] .wheel-actions>.wheel-reset{background:#392a1e;border-color:#a37a52;color:#f3dfc0}

@@ -36,17 +36,42 @@
     token.removeAttribute('aria-haspopup');token.setAttribute('aria-controls','wuxing-focus-status');
     token.setAttribute('aria-describedby','wuxing-focus-instruction');
   }
-  const toolbar=html('div',{id:'wuxing-focus-toolbar'});
+  const toolbar=document.getElementById('wuxing-focus-toolbar');
   const idleInstruction='点击棋子看关系；盘心换关系；拖动旋转换焦点';
   const focusedInstruction='点击当前棋子返回，点击其他棋子换焦点';
   const instruction=html('p',{id:'wuxing-focus-instruction'},idleInstruction);
   const exitButton=html('button',{id:'wuxing-focus-exit',type:'button'},'返回三层');exitButton.hidden=true;
-  instruction.setAttribute('role','presentation');document.querySelector('.page-nav').append(instruction);toolbar.append(exitButton);
+  toolbar.append(exitButton);
   const status=html('p',{id:'wuxing-focus-status',role:'status','aria-live':'polite'});status.hidden=true;
-  // Reserve both control rows in every mode: text and the return button may
-  // change, but the SVG viewport must never move or rescale with them.
+  // Instructions belong in the top layer, never in a height-reserving row above the wheel.
+  const helpToggle=html('button',{id:'wuxing-help-toggle',type:'button','aria-haspopup':'dialog','aria-expanded':'false','aria-controls':'wuxing-help-popover'},'展开说明');
+  document.querySelector('.page-nav').append(helpToggle);
+  const help=html('dialog',{id:'wuxing-help-popover','aria-labelledby':'wuxing-help-title'});
+  const helpHeading=html('div',{class:'wuxing-help-heading'});
+  const helpClose=html('button',{id:'wuxing-help-close',type:'button',autofocus:''},'收起说明');
+  helpHeading.append(html('h2',{id:'wuxing-help-title'},'圆盘操作说明'),helpClose);
   const controls=html('div',{id:'wuxing-focus-controls'});
-  controls.append(toolbar,status);document.querySelector('.board-wrap').before(controls);
+  const details=html('ul');
+  for(const text of [
+    '完整圆盘：点击任意棋子，查看该层以此项为焦点的关系。',
+    '单层关系：点击其他棋子切换焦点；点击当前棋子或右侧“返回三层”恢复完整圆盘。',
+    '点击盘心名称更换该层内容；拖动圆盘旋转，松手后吸附到整格，也可使用下方旋转按钮。',
+    '右侧重置按钮恢复初始状态。键盘可用方向键旋转、Enter 或空格选择棋子，Escape 退出关系查看。'
+  ])details.append(html('li',{},text));
+  controls.append(instruction,details,status);help.append(helpHeading,controls);document.body.append(help);
+  helpToggle.addEventListener('click',()=>{
+    if(help.open){help.close();return;}
+    help.showModal();helpToggle.setAttribute('aria-expanded','true');helpToggle.textContent='收起说明';
+  });
+  helpClose.addEventListener('click',()=>help.close());
+  help.addEventListener('close',()=>{
+    helpToggle.setAttribute('aria-expanded','false');helpToggle.textContent='展开说明';helpToggle.focus({preventScroll:true});
+  });
+  help.addEventListener('click',event=>{
+    const rect=help.getBoundingClientRect();
+    if(event.target===help&&(event.clientX<rect.left||event.clientX>rect.right||event.clientY<rect.top||event.clientY>rect.bottom))help.close();
+  });
+  document.addEventListener('wuxing-view-change',event=>{if(event.detail.view!=='disc'&&help.open)help.close();});
   // Keep the original step controls and their native listeners. Only their
   // visible labels change; the SVGs are decorative beside accessible names.
   for(const [id,label,mirror]of [['ccw','逆时针旋转一格',true],['cw','顺时针旋转一格',false]]){

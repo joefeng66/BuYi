@@ -52,6 +52,7 @@
 !/tests/
 /tests/*
 !/tests/release_test.py
+!/tests/wuxing-mobile-layout.cjs
 !/tests/release-browser.cjs
 !/.github/
 /.github/*

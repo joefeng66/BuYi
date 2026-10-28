@@ -4,7 +4,13 @@
   const $=id=>document.getElementById(id);
   const el=(tag,attrs={},text)=>{const n=document.createElement(tag);for(const[k,v]of Object.entries(attrs))n.setAttribute(k,v);if(text!==undefined)n.textContent=text;return n;};
   const disc=$('disc'),aside=disc.querySelector('aside'),atlas=$('atlas');
-  // Reuse the native reset handler; place the same icon as the meridian viewer on the wheel.
+  // One canvas and an independent side rail are shared by both relationship modes.
+  // Moving these existing nodes preserves all native listeners and SVG coordinates.
+  const wrap=disc.querySelector('.board-wrap');
+  const canvas=el('div',{class:'wheel-canvas'});canvas.append(...wrap.childNodes);
+  const actions=el('div',{id:'wuxing-focus-toolbar',class:'wheel-actions','aria-label':'圆盘操作'});
+  wrap.append(canvas,actions);
+  // Reuse the native reset handler outside the SVG's gesture area.
   const reset=$('reset');
   if(reset){
     reset.hidden=false;reset.style.removeProperty('display');reset.classList.add('wheel-reset');
@@ -13,7 +19,7 @@
     icon.setAttribute('viewBox','0 0 24 24');icon.setAttribute('aria-hidden','true');
     const path=document.createElementNS('http://www.w3.org/2000/svg','path');
     path.setAttribute('d','M20 7v5h-5 M19.1 11a7.2 7.2 0 1 0-1.6 5.8');
-    icon.append(path);reset.replaceChildren(icon);document.querySelector('.board-wrap').append(reset);
+    icon.append(path);reset.replaceChildren(icon);actions.append(reset);
   }
   document.querySelector('.brand small').textContent='转一转，点一点';
   document.querySelector('.edition')?.remove();

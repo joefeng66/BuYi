@@ -192,12 +192,22 @@ thead th { color: #705133; font-size: 13px; }
 html[data-theme="dark"] .page-nav [role="tab"][aria-selected="true"]{background:#493c2d;border-color:#bb976c;color:#f3dfc0}
 @media(max-width:760px){#disc{padding:4px 12px 18px}#layers{padding:18px 16px}#layers .reference-heading{display:block}#layers .reference-heading h2{font-size:18px}#wuxing-provenance{margin-inline:16px;padding:0 4px}.brand .seal{min-width:36px}.page-nav{padding-top:6px}.layer-row{margin-top:10px}}
 
-@media(min-width:761px){#disc .board-wrap{width:min(100%,max(360px,calc(100dvh - 330px)))}}
-
-.suite-embedded .page-nav{min-height:58px;padding:7px 108px 7px 16px;justify-content:flex-start;gap:6px}
+.suite-embedded .page-nav{min-height:58px;padding:7px 16px;justify-content:flex-start;gap:6px}
 .suite-embedded .page-nav [role="tab"]{min-width:64px;padding:8px 16px;font-size:14px}
-@media(min-width:761px){.suite-embedded #disc .board-wrap{width:min(100%,max(360px,calc(100dvh - 230px)))}}
-@media(max-width:350px){.suite-embedded .page-nav{padding-left:12px;padding-right:96px}.suite-embedded .page-nav [role="tab"]{padding-inline:12px;min-width:60px}}
+@media(max-width:350px){.suite-embedded .page-nav{padding-inline:12px}.suite-embedded .page-nav [role="tab"]{padding-inline:12px;min-width:60px}}
+
+/* The wheel is width-driven on phones. Browser-toolbar height changes only
+   resize the outer scrolling viewport, never the SVG or an empty spacer. */
+.page-nav{flex-wrap:nowrap}
+#disc .workspace{min-width:0;min-height:0;display:block}
+#disc .board-wrap{--wheel-tools:44px;--wheel-gap:8px;display:grid;grid-template-columns:minmax(0,1fr) var(--wheel-tools);gap:var(--wheel-gap);align-items:start;width:100%;max-width:850px;aspect-ratio:auto;min-height:0;margin:0 auto}
+.wheel-canvas{position:relative;min-width:0;aspect-ratio:1;user-select:none}
+#disc #board{display:block;inline-size:100%;block-size:auto;aspect-ratio:1}
+#disc .rotation-bar{margin-top:4px}
+@media(min-width:761px){
+  #disc .board-wrap{width:min(100%,calc(max(360px,calc(100svh - 330px)) + var(--wheel-tools) + var(--wheel-gap)))}
+  .suite-embedded #disc .board-wrap{width:min(100%,calc(max(360px,calc(100svh - 230px)) + var(--wheel-tools) + var(--wheel-gap)))}
+}
 
 /* One searchable notebook list, with provenance retained inside each row. */
 #layers .reference-heading{display:flex;align-items:center;gap:12px;margin-bottom:12px}
@@ -241,17 +251,9 @@ html[data-theme="dark"] .page-nav [role="tab"][aria-selected="true"]{background:
 #clockwise-arcs,#wuxing-focus-edges{fill:none;stroke:var(--relation-line-color);stroke-width:var(--relation-line-width);stroke-linecap:butt;opacity:var(--relation-line-opacity)}
 #clockwise-arcs>path,#wuxing-focus-edges>path{fill:none;stroke:inherit;stroke-width:inherit;stroke-linecap:butt;vector-effect:none}
 #clockwise-arrow path,#wuxing-focus-arrow path{fill:var(--relation-line-color);stroke:none}
-#wuxing-focus-controls{display:grid;grid-template-rows:44px 44px;gap:6px;height:94px;margin:6px 0 0;color:var(--ink)}
-#wuxing-focus-toolbar{display:grid;grid-template-columns:minmax(0,1fr) 88px;align-items:center;gap:12px;min-width:0}
-#wuxing-focus-instruction{margin:0;min-width:0;font-size:13px;line-height:22px;overflow-wrap:anywhere}
-#wuxing-focus-exit{flex-shrink:0;min-height:44px;min-width:88px;padding:8px 14px;border:1px solid #987451;border-radius:8px;background:#fff6e7;color:#4c301f;font:inherit;font-size:14px;cursor:pointer}
-/* The fixed parent grid reserves both rows even when these children use
-   native hidden behavior, remaining unfocusable and absent from the a11y tree. */
-#wuxing-focus-exit[hidden],#wuxing-focus-status[hidden]{visibility:hidden;pointer-events:none}
-#wuxing-focus-status{margin:0;min-width:0;font-size:13px;line-height:22px;color:var(--ink);overflow-wrap:anywhere}
-/* Preserve the existing control slots and board geometry while removing
-   presentation copy. Native drag/status updates cannot flash these labels. */
-#wuxing-focus-status,#disc .north,#disc #drag-hint{visibility:hidden;pointer-events:none}
+#wuxing-focus-toolbar{display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:44px 56px;align-content:start;justify-items:stretch;gap:12px;min-width:0;padding-top:8px}
+#wuxing-focus-exit{min-width:0;min-height:56px;width:100%;margin:0;padding:6px 4px;border:1px solid #987451;border-radius:8px;background:#fff6e7;color:#4c301f;font:inherit;font-size:13px;line-height:20px;white-space:normal;word-break:normal;cursor:pointer}
+#disc .north,#disc #drag-hint{visibility:hidden;pointer-events:none}
 #disc .workspace.relationship-focus .rotation-bar>div{visibility:hidden;pointer-events:none}
 #disc .rotation-bar>button>svg{display:block;width:24px;height:24px;margin-inline:auto;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;pointer-events:none}
 #wuxing-focus-edges,#wuxing-focus-labels,#wuxing-focus-drag-ring{display:none}
@@ -265,13 +267,21 @@ html[data-theme="dark"] .page-nav [role="tab"][aria-selected="true"]{background:
 #board.relationship-focus .token.relationship-selected .selection{stroke:#3d2517;stroke-width:2.5px;vector-effect:non-scaling-stroke}
 #board.relationship-focus .token:focus-visible{outline:3px solid #3d2517;outline-offset:4px}
 html[data-theme="dark"] #wuxing-focus-exit{background:#3b3026;border-color:#c69b6c;color:#f3dfc0}
-@media(max-width:760px){#wuxing-focus-controls{grid-template-rows:44px 60px;height:110px;margin-inline:4px}#wuxing-focus-toolbar{gap:8px}#wuxing-focus-instruction,#wuxing-focus-status{font-size:12px;line-height:20px}#wuxing-focus-exit{font-size:13px;padding-inline:10px}}
-
-/* The instruction shares the tab row; reserved controls keep wheel position stable. */
-.page-nav #wuxing-focus-instruction{flex:1 1 175px;text-align:right;font-size:12px;line-height:1.45}
-.page-nav:has(#view-disc[aria-selected="false"]) #wuxing-focus-instruction{visibility:hidden}
-@media(max-width:430px){.page-nav{gap:4px;padding-inline:10px}.page-nav [role="tab"]{min-width:66px;padding-inline:7px}.page-nav #wuxing-focus-instruction{font-size:11px}}
-#wuxing-focus-toolbar #wuxing-focus-exit{grid-column:2}
+/* A labelled dialog keeps the complete changing instruction outside document flow. */
+.page-nav #wuxing-help-toggle{flex:0 0 auto;margin-left:auto;min-width:80px;min-height:44px;padding:8px 6px;border:1px solid var(--line);border-radius:8px;font-size:12px;line-height:20px;color:var(--ink);white-space:nowrap}
+.page-nav:has(#view-disc[aria-selected="false"]) #wuxing-help-toggle{visibility:hidden}
+#wuxing-help-popover{position:fixed;inset:12px;margin:auto;width:min(440px,calc(100% - 24px));max-width:none;max-height:calc(100vh - 24px);max-height:calc(100dvh - 24px - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px));padding:16px;border:1px solid var(--line);border-radius:14px;background:var(--paper);color:var(--ink);box-shadow:0 18px 70px #382a2440;overflow:auto;overscroll-behavior:contain}
+#wuxing-help-popover[open]{display:grid;grid-template-rows:auto minmax(0,1fr);gap:12px}
+#wuxing-help-popover::backdrop{background:#33241955;backdrop-filter:blur(3px)}
+.wuxing-help-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;min-width:0}
+.wuxing-help-heading h2{margin:0;font-size:17px;line-height:1.5}
+#wuxing-help-close{flex-shrink:0;min-height:44px;padding:8px 10px;border:1px solid var(--line);border-radius:8px;font-size:13px}
+#wuxing-focus-controls{min-height:0;min-width:0;overflow-y:auto;overflow-wrap:anywhere;line-height:1.75}
+#wuxing-focus-controls ul{margin:12px 0;padding-left:22px}
+#wuxing-focus-controls li+li{margin-top:8px}
+#wuxing-focus-instruction{margin:0;font-size:14px;font-weight:600;line-height:1.75;white-space:normal}
+#wuxing-focus-status{margin:12px 0 0;padding-top:12px;border-top:1px solid var(--line);font-size:13px;line-height:1.75;color:var(--ink)}
+@media(max-width:350px){.page-nav [role="tab"]{padding-inline:10px}.page-nav #wuxing-help-toggle{min-width:76px;font-size:12px}}
 
 /* Larger circular rotation controls, without altering step/drag handlers. */
 #disc .rotation-bar>button{width:56px;height:56px;min-width:56px;min-height:56px;padding:0;border-radius:50%;display:grid;place-items:center}
@@ -283,10 +293,10 @@ html[data-theme="dark"] #wuxing-focus-labels text{fill:#20140d}
 
 /* Secondary relationships retain direction without competing with the four focal edges. */
 #wuxing-focus-edges>path.secondary-relation{stroke-width:2.8px;stroke-dasharray:9 8;opacity:.66}
-.board-wrap>.wheel-reset{position:absolute;right:2%;top:2%;z-index:2;width:44px;height:44px;min-height:44px;margin:0;padding:10px;display:grid;place-items:center;border:1px solid #b99a73;border-radius:50%;background:#f9f2e5;color:#5b412c;box-shadow:0 3px 10px #52351b14}
-.board-wrap>.wheel-reset svg{width:23px;height:23px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-.board-wrap>.wheel-reset:focus-visible{outline:2px solid currentColor;outline-offset:3px}
-html[data-theme="dark"] .board-wrap>.wheel-reset{background:#392a1e;border-color:#a37a52;color:#f3dfc0}
+.wheel-actions>.wheel-reset{position:static;width:44px;height:44px;min-height:44px;margin:0;padding:10px;display:grid;place-items:center;border:1px solid #b99a73;border-radius:50%;background:#f9f2e5;color:#5b412c;box-shadow:0 3px 10px #52351b14}
+.wheel-actions>.wheel-reset svg{width:23px;height:23px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.wheel-actions>.wheel-reset:focus-visible{outline:2px solid currentColor;outline-offset:3px}
+html[data-theme="dark"] .wheel-actions>.wheel-reset{background:#392a1e;border-color:#a37a52;color:#f3dfc0}
 </style><link rel="stylesheet" href="../assets/theme.css"><script id="suite-theme-controller" src="../assets/theme.js"></script></head>
 <body>
 <header><a class="brand" href="#"><span class="seal">五</span><span>五行关系盘<small>转一格，看一组关系。</small></span></a><div class="edition">笔记全览 · 自选三层 <span>05</span></div><button id="reset" class="text-button">恢复初始 ↺</button></header>
@@ -838,7 +848,13 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
   const $=id=>document.getElementById(id);
   const el=(tag,attrs={},text)=>{const n=document.createElement(tag);for(const[k,v]of Object.entries(attrs))n.setAttribute(k,v);if(text!==undefined)n.textContent=text;return n;};
   const disc=$('disc'),aside=disc.querySelector('aside'),atlas=$('atlas');
-  // Reuse the native reset handler; place the same icon as the meridian viewer on the wheel.
+  // One canvas and an independent side rail are shared by both relationship modes.
+  // Moving these existing nodes preserves all native listeners and SVG coordinates.
+  const wrap=disc.querySelector('.board-wrap');
+  const canvas=el('div',{class:'wheel-canvas'});canvas.append(...wrap.childNodes);
+  const actions=el('div',{id:'wuxing-focus-toolbar',class:'wheel-actions','aria-label':'圆盘操作'});
+  wrap.append(canvas,actions);
+  // Reuse the native reset handler outside the SVG's gesture area.
   const reset=$('reset');
   if(reset){
     reset.hidden=false;reset.style.removeProperty('display');reset.classList.add('wheel-reset');
@@ -847,7 +863,7 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
     icon.setAttribute('viewBox','0 0 24 24');icon.setAttribute('aria-hidden','true');
     const path=document.createElementNS('http://www.w3.org/2000/svg','path');
     path.setAttribute('d','M20 7v5h-5 M19.1 11a7.2 7.2 0 1 0-1.6 5.8');
-    icon.append(path);reset.replaceChildren(icon);document.querySelector('.board-wrap').append(reset);
+    icon.append(path);reset.replaceChildren(icon);actions.append(reset);
   }
   document.querySelector('.brand small').textContent='转一转，点一点';
   document.querySelector('.edition')?.remove();
@@ -945,17 +961,42 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
     token.removeAttribute('aria-haspopup');token.setAttribute('aria-controls','wuxing-focus-status');
     token.setAttribute('aria-describedby','wuxing-focus-instruction');
   }
-  const toolbar=html('div',{id:'wuxing-focus-toolbar'});
+  const toolbar=document.getElementById('wuxing-focus-toolbar');
   const idleInstruction='点击棋子看关系；盘心换关系；拖动旋转换焦点';
   const focusedInstruction='点击当前棋子返回，点击其他棋子换焦点';
   const instruction=html('p',{id:'wuxing-focus-instruction'},idleInstruction);
   const exitButton=html('button',{id:'wuxing-focus-exit',type:'button'},'返回三层');exitButton.hidden=true;
-  instruction.setAttribute('role','presentation');document.querySelector('.page-nav').append(instruction);toolbar.append(exitButton);
+  toolbar.append(exitButton);
   const status=html('p',{id:'wuxing-focus-status',role:'status','aria-live':'polite'});status.hidden=true;
-  // Reserve both control rows in every mode: text and the return button may
-  // change, but the SVG viewport must never move or rescale with them.
+  // Instructions belong in the top layer, never in a height-reserving row above the wheel.
+  const helpToggle=html('button',{id:'wuxing-help-toggle',type:'button','aria-haspopup':'dialog','aria-expanded':'false','aria-controls':'wuxing-help-popover'},'展开说明');
+  document.querySelector('.page-nav').append(helpToggle);
+  const help=html('dialog',{id:'wuxing-help-popover','aria-labelledby':'wuxing-help-title'});
+  const helpHeading=html('div',{class:'wuxing-help-heading'});
+  const helpClose=html('button',{id:'wuxing-help-close',type:'button',autofocus:''},'收起说明');
+  helpHeading.append(html('h2',{id:'wuxing-help-title'},'圆盘操作说明'),helpClose);
   const controls=html('div',{id:'wuxing-focus-controls'});
-  controls.append(toolbar,status);document.querySelector('.board-wrap').before(controls);
+  const details=html('ul');
+  for(const text of [
+    '完整圆盘：点击任意棋子，查看该层以此项为焦点的关系。',
+    '单层关系：点击其他棋子切换焦点；点击当前棋子或右侧“返回三层”恢复完整圆盘。',
+    '点击盘心名称更换该层内容；拖动圆盘旋转，松手后吸附到整格，也可使用下方旋转按钮。',
+    '右侧重置按钮恢复初始状态。键盘可用方向键旋转、Enter 或空格选择棋子，Escape 退出关系查看。'
+  ])details.append(html('li',{},text));
+  controls.append(instruction,details,status);help.append(helpHeading,controls);document.body.append(help);
+  helpToggle.addEventListener('click',()=>{
+    if(help.open){help.close();return;}
+    help.showModal();helpToggle.setAttribute('aria-expanded','true');helpToggle.textContent='收起说明';
+  });
+  helpClose.addEventListener('click',()=>help.close());
+  help.addEventListener('close',()=>{
+    helpToggle.setAttribute('aria-expanded','false');helpToggle.textContent='展开说明';helpToggle.focus({preventScroll:true});
+  });
+  help.addEventListener('click',event=>{
+    const rect=help.getBoundingClientRect();
+    if(event.target===help&&(event.clientX<rect.left||event.clientX>rect.right||event.clientY<rect.top||event.clientY>rect.bottom))help.close();
+  });
+  document.addEventListener('wuxing-view-change',event=>{if(event.detail.view!=='disc'&&help.open)help.close();});
   // Keep the original step controls and their native listeners. Only their
   // visible labels change; the SVGs are decorative beside accessible names.
   for(const [id,label,mirror]of [['ccw','逆时针旋转一格',true],['cw','顺时针旋转一格',false]]){

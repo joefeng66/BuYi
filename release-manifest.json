@@ -1,0 +1,101 @@
+{
+  "version": 3,
+  "content_mode": "user-authorized",
+  "base_path": "/BuYi/",
+  "publishable": true,
+  "pending_approvals": [],
+  "excluded": [
+    "私人笔记完整原文、本机绝对路径、私人源笔记路径、快照指纹与 Obsidian 入口",
+    "备份、缓存、证据截图、私人日志、原始工程快照和完整知识库"
+  ],
+  "rights_notice": {
+    "contact_email": "joefeng66@gmail.com",
+    "text": "本网站用于个人学习与资料整理。第三方资料的著作权及其他权利归原权利人所有，项目代码许可不改变这些资料的权利归属。如您认为本站内容涉及侵权，请联系 joefeng66@gmail.com，并提供相关页面和权利依据；我们将及时核查，并根据情况更正或下架。"
+  },
+  "licensed_assets": [
+    {
+      "id": "makehuman-core",
+      "license": "CC0-1.0",
+      "sha256": "ce24f106ab786529753978c457f725bd7ce664db42d6a7290a0d89ce9373ec2a",
+      "evidence": "GLB copyright metadata identifies the MakeHuman core basemesh; exact bytes pinned.",
+      "source": "https://github.com/makehumancommunity/makehuman/blob/master/LICENSE.md"
+    },
+    {
+      "id": "three-js-bundle",
+      "license": "MIT",
+      "input_script_sha256": "09f7f06656fcc74bb3dd7787520c10fd9e6f977562e992b69365fd676611c7af",
+      "evidence": "Existing bundle has Three.js copyright/SPDX and full MIT notice; exact input script pinned.",
+      "source": "https://github.com/mrdoob/three.js/blob/dev/LICENSE"
+    },
+    {
+      "id": "ma-shan-zheng",
+      "license": "OFL-1.1",
+      "sha256": "6d2546bb189c732a8ca29af9e22457b152387d158aa459e4ac2ce1e51788b7fb",
+      "version": "Version 2.003",
+      "evidence": "Internal TTF name, copyright and OFL metadata match the preserved notice.",
+      "source": "https://github.com/google/fonts/blob/main/ofl/mashanzheng/OFL.txt"
+    },
+    {
+      "id": "opencc-js",
+      "license": "MIT AND Apache-2.0",
+      "sha256": "95b04abf136d9c28263773bb7d357eac80b7954d101efd23c4d09c737d3d379e",
+      "source": "https://github.com/nk2028/opencc-js",
+      "evidence": "Existing pinned vendored dependency and complete license files."
+    }
+  ],
+  "unverified_rights": [
+    "lecture-pdf",
+    "formula-mixed-text",
+    "indication-excerpts",
+    "acupuncture-teaching-text",
+    "wuxing-note-prose",
+    "cun-tracings",
+    "synthesized-audio"
+  ],
+  "approvals": [
+    {
+      "id": "public-source",
+      "approved": true,
+      "evidence": "2026-10-28 用户明确同意程序源码公开。"
+    },
+    {
+      "id": "personal-data",
+      "approved": true,
+      "evidence": "2026-10-28 用户明确同意个人整理数据公开。"
+    },
+    {
+      "id": "supplied-content",
+      "approved": true,
+      "evidence": "2026-10-28 用户明确表示此前列出的内容都可以公布，并要求加入侵权联系下架声明；指定公开联系邮箱 joefeng66@gmail.com。此记录表示用户的发布选择，不表示第三方已授予许可。"
+    },
+    {
+      "id": "licensed-dependencies",
+      "approved": true,
+      "evidence": "保留 MakeHuman CC0、Three.js MIT、Ma Shan Zheng OFL、OpenCC MIT/Apache-2.0 的现有声明和完整许可；固定对应资产哈希。"
+    }
+  ],
+  "files": {
+    ".nojekyll": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "CONTENT-NOTICE.txt": "0b4c94ddf6cba692621f7e329c07c1cf77b518fc2ef215470b20f4f44bb70614",
+    "COPYRIGHT-EXCLUSIONS.txt": "b9d67b1eb2cdb205704f21c25f6fd58ab31cf9646c113aecedaee1d51c81e33b",
+    "LICENSE": "5bceb2f2dcbf4d4f35ec6367998a98b689392c6c8caf1e12ad3d598885095fef",
+    "apps/formulas.html": "e5f74a96b2c486d0a938fd7aebe46c1eb5401c35dae51ab5794b41bd8098df58",
+    "apps/meridians.html": "681338d542a15eb934c058bc5a49f091043ebaab03356e07529eaa1061b27962",
+    "apps/wuxing.html": "5062c61297abd6178adf4a8362b49c6bde8e5746f41e7075978b26363a6b5de3",
+    "assets/lecture.pdf": "9ee42f24f983656866117773687f0c0e69c9619482f11a5831cecac5792e3532",
+    "assets/opencc.js": "95b04abf136d9c28263773bb7d357eac80b7954d101efd23c4d09c737d3d379e",
+    "assets/script-display.js": "719e9c5f3e2a7c1f8f12a037dca75b6c7c3952a5f9de8c159afad815451e8949",
+    "assets/theme.css": "4b82d5b4e56d462fb5d48bd840a83f528f93ee778f2a9b97b8a2bc082dbfc805",
+    "assets/theme.js": "567afac825f555825daca4db874f0827dfbd156699df53d62ad31c21656160ff",
+    "index.html": "4ada2f866a68669e9f21c3e370d3b798296e63434a679bca746b47a896a3d35f",
+    "suite.css": "f7346705d1f11e077c617b9a6bf006a0649ba9a85d859058eecdb83269e8abda",
+    "suite.js": "1c19967c6262ef47a60fcd5fb45bb2ba4bffe07a73f95a7ddf906617602dfb92",
+    "third-party/ma-shan-zheng/LICENSE": "d7bdb1cee215b689e23c2f95672a6084c790542170648267a55114103d756a08",
+    "third-party/makehuman/LICENSE": "f6089cba01cb570a24712b41ab8a586ccd3cc5ef53dc266ca50b95c288956d2c",
+    "third-party/opencc-js/LICENSE": "960f7fc16d8baa126802316a7df9078a383af4fb6bc60033adb28e85c08d5e5e",
+    "third-party/opencc-js/LICENSES/Apache-2.0.txt": "b534e465949558eec2597b04f5092b5e161236a68dfbfd04d547592ac3964308",
+    "third-party/opencc-js/THIRD_PARTY_LICENSES.md": "42c7dbe71c178fcca97ba945e9ac9ff360fb69bbfea4cb50556f6c65bfa59806",
+    "third-party/opencc-js/provenance.json": "b3e6c36bc76024c95226c0d395c21875339ff8cb3634a480a25b47a54855f8d5",
+    "third-party/three-js/LICENSE": "bfe119ea4fd413f5f7ca3fcd63adb0c4a073ed39daa2fe7d3e6b769e21272601"
+  }
+}
